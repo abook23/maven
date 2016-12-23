@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body style="background: white;">
+		<div class="row wrapper border-bottom white-bg page-heading">
+			<div class="col-sm-4">
+				<h2>用户详情</h2>
+				<ol class="breadcrumb">
+					<li>
+						<a href="index.html">用户管理</a>
+					</li>
+					<li>
+						<strong>详情</strong>
+					</li>
+				</ol>
+			</div>
+			<div class="col-sm-offset-6 col-sm-2">
+				<button id="add" type="button" class="btn btn-primary btn-sm" onclick="submit()">提交</button>
+			</div>
+		</div>
+		<div style="margin-bottom: 20px;"></div>
+		<div class="row">
+			<div class=" col-sm-offset-1 col-sm-2 ">
+				<div class="text-center">
+					<img alt="image" class="img-circle m-t-xs img-responsive" src="/img/a2.jpg">
+					<h1 id="userName">${(userInfo.name)!}</h1>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<form id="userInfoFrom" class="form-horizontal" role="form">
+					<div class="row">
+						<div class="col-xs-6">
+							<input name="user.userId" value="${(userInfo.userId)!}" style="display: none;" />
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+								<div class="col-sm-9">
+									<input name="userInfo.name" value="${(userInfo.name)!}" class="form-control" type="text" placeholder="用户名" required="" aria-required="true">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-3 control-label">手机号</label>
+								<div class="col-sm-9">
+									<input name="userInfo.phone" value="${(userInfo.phone)!}" class="form-control" type="tel" placeholder="手机号" required="" aria-required="true">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-3 control-label">邮箱</label>
+								<div class="col-sm-9">
+									<input name="userInfo.email" value="${(userInfo.email)!}" class="form-control" type="email" placeholder="邮箱" required="" aria-required="true">
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-3 control-label">密码</label>
+								<div class="col-sm-9">
+									<input name="user.password" value="${(user.password)!}" class="form-control" type="password" placeholder="密码" required="" aria-required="true">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-3 control-label">QQ</label>
+								<div class="col-sm-9">
+									<input name="userInfo.qq" value="${(userInfo.qq)!}" class="form-control" type="number" placeholder="QQ" required="" aria-required="true">
+								</div>
+							</div>
+						</div>
+					</div>
+					</from>
+			</div>
+
+		</div>
+		<!-- jQuery Validation plugin javascript-->
+		<script src="/js/plugins/validate/jquery.validate.min.js"></script>
+		<script src="/js/plugins/validate/messages_zh.min.js"></script>
+		<script>
+			//以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+			$.validator.setDefaults({
+				highlight: function(element) {
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+				},
+				success: function(element) {
+					element.closest('.form-group').removeClass('has-error').addClass('has-success');
+				},
+				errorElement: "span",
+				errorClass: "help-block m-b-none",
+				validClass: "help-block m-b-none"
+			});
+			//以下为官方示例
+			$().ready(function() {
+				// validate the comment form when it is submitted
+				$("#userInfoFrom").validate({
+					submitHandler: function() {
+
+						$.post("/user/edit", $('#userInfoFrom').serialize(), function(data) {
+							layer.msg(data.msg, {
+								time: 1000 //20s后自动关闭
+							}, function() {
+								parent.layer.closeAll();
+								common_ajax.ajaxFormMainPanel('/user/list');
+							});
+						});
+					}
+				});
+				//				// propose username by combining first- and lastname
+				//				$("#username").focus(function() {
+				//					var firstname = $("#firstname").val();
+				//					var lastname = $("#lastname").val();
+				//					if (firstname && lastname && !this.value) {
+				//						this.value = firstname + "." + lastname;
+				//					}
+				//				});
+			});
+
+			function submit() {
+				$('#userInfoFrom').submit();
+				//var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+				//parent.layer.closeAll(); //再执行关闭  
+				//layer.closeAll();
+			}
+		</script>
+
+	</body>
+
+</html>

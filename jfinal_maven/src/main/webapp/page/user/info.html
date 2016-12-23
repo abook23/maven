@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div class="row wrapper border-bottom white-bg page-heading">
+			<div class="col-sm-4">
+				<h2>用户详情</h2>
+				<ol class="breadcrumb">
+					<li>
+						<a href="index.html">用户管理</a>
+					</li>
+					<li>
+						<strong>详情</strong>
+					</li>
+				</ol>
+			</div>
+			<div class="col-sm-offset-6 col-sm-2">
+				<button type="button" class="btn btn-primary btn-sm" onclick="edit('${userInfo.userId}')">修改</button>
+				<button type="button" class="btn btn-warning btn-sm" onclick="del('${userInfo.userId}')">删除</button>
+			</div>
+		</div>
+		<div style="margin-bottom: 20px;"></div>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-2">
+				<div class="text-center">
+					<img alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg">
+					<h1>${userInfo.name}</h1>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<dl class="dl-horizontal">
+					<dt>用户名：</dt>
+					<dd>${userInfo.name}</dd>
+					<dt>手机：</dt>
+					<dd>${userInfo.phone}</dd>
+					<dt>邮箱：</dt>
+					<dd>${userInfo.email}</dd>
+					<dt>QQ：   </dt>
+					<dd>${userInfo.qq}</dd>
+					<dt>版本：</dt>
+					<dd>v1.4.2</dd>
+				</dl>
+			</div>
+			<div class="col-sm-5" id="cluster_info">
+				<dl class="dl-horizontal">
+
+					<dt>最后更新：</dt>
+					<dd>2014年 11月7日 22:03</dd>
+					<dt>创建时间：</dt>
+					<dd>${userInfo.createTime}</dd>
+					<dt>团队成员：</dt>
+					<dd class="project-people">
+						<a href="project_detail.html">
+							<img alt="image" class="img-circle" src="img/a3.jpg">
+						</a>
+						<a href="project_detail.html">
+							<img alt="image" class="img-circle" src="img/a1.jpg">
+						</a>
+						<a href="project_detail.html">
+							<img alt="image" class="img-circle" src="img/a2.jpg">
+						</a>
+						<a href="project_detail.html">
+							<img alt="image" class="img-circle" src="img/a4.jpg">
+						</a>
+						<a href="project_detail.html">
+							<img alt="image" class="img-circle" src="img/a5.jpg">
+						</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</body>
+
+</html>

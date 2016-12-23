@@ -1,0 +1,55 @@
+<link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<div class="col-lg-12">
+	<div class="ibox float-e-margins">
+		<div class="ibox-title">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-10">
+					<h5>系统管理/用户管理</h5>
+				</div>
+				<div class="col-xs-6 col-md-2">
+					<button id="add" type="button" class="btn btn-primary btn-sm" onclick="add()">添加</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>基本 <small>分类，查找</small></h5>
+					</div>
+					<div class="ibox-content">
+						<table class="table table-striped table-hover dataTables-example">
+							<thead>
+								<tr>
+									<th>名称</th>
+									<th>描述</th>
+									<th>状态</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Data Tables -->
+<script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="../../js/plugins/dataTables/dataTables.abook23.js"></script>
+
+<script src="/page/user/user.js"></script>
+<!-- Page-Level Scripts -->
+
+<script>
+	$(document).ready(function() {
+		var table = dataTableByServer(".dataTables-example", "/role/listData", "userID,_describe,status");
+		$('.dataTables-example').on("dblclick", 'tr', function() {
+			var rowData = table.row(this).data();
+			info(rowData.userId);
+		});
+	});
+</script>
